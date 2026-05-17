@@ -31,21 +31,21 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: 'Failed to save submission' });
     }
 
-    // Send email via Resend
-    const emailError = await resend.emails.send({
-      from: 'onboarding@resend.dev',
-      to: 'kinderkindconnect@proton.me',
-      subject: `New KinderKindConnect Submission: ${role === 'parent' ? 'Parent' : 'Tutor'}`,
-      html: `
-        <h2>New Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Role:</strong> ${role === 'parent' ? 'Parent of a neurodiverse child' : role === 'tutor' ? 'Tutor / Educator' : 'Other'}</p>
-        <p><strong>Submitted:</strong> ${new Date().toLocaleString()}</p>
-      `,
-    });
-
-    if (emailError) {
+    // Send email via Resend (async, don't wait)
+    try {
+      await resend.emails.send({
+        from: 'onboarding@resend.dev',
+        to: 'kinderkindconnect@proton.me',
+        subject: `New KinderKindConnect Submission: ${role === 'parent' ? 'Parent' : 'Tutor'}`,
+        html: `
+          <h2>New Submission</h2>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Role:</strong> ${role === 'parent' ? 'Parent of a neurodiverse child' : role === 'tutor' ? 'Tutor / Educator' : 'Other'}</p>
+          <p><strong>Submitted:</strong> ${new Date().toLocaleString()}</p>
+        `,
+      });
+    } catch (emailError) {
       console.error('Email error:', emailError);
       // Still return success since data was saved
     }
