@@ -43,7 +43,7 @@ export default function KinderKindConnectLanding() {
             </h2>
             
             <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-              KinderKindConnect matches your child with tutors who understand <em>how</em> they learn—not how they should fit into a mold.
+              KinderKindConnect matches your child with tutors who understand how they learn - not how they should fit into a mold.
             </p>
 
             <div className="space-y-4 mb-10">
@@ -51,21 +51,21 @@ export default function KinderKindConnectLanding() {
                 <div className="flex-shrink-0 w-6 h-6 rounded-full bg-orange-600 flex items-center justify-center">
                   <span className="text-white text-sm font-bold">✓</span>
                 </div>
-                <p className="text-gray-700"><strong>Personality-based matching</strong> — find the right personality fit, not just qualifications</p>
+                <p className="text-gray-700"><strong>Personality-based matching</strong> - find the right personality fit, not just qualifications</p>
               </div>
               
               <div className="flex gap-3">
                 <div className="flex-shrink-0 w-6 h-6 rounded-full bg-orange-600 flex items-center justify-center">
                   <span className="text-white text-sm font-bold">✓</span>
                 </div>
-                <p className="text-gray-700"><strong>For homeschoolers & families</strong> — simple, direct, no bureaucracy</p>
+                <p className="text-gray-700"><strong>For homeschoolers & families</strong> - simple, direct, no bureaucracy</p>
               </div>
               
               <div className="flex gap-3">
                 <div className="flex-shrink-0 w-6 h-6 rounded-full bg-orange-600 flex items-center justify-center">
                   <span className="text-white text-sm font-bold">✓</span>
                 </div>
-                <p className="text-gray-700"><strong>We celebrate neurodiversity</strong> — as a strength, not something to fix</p>
+                <p className="text-gray-700"><strong>We celebrate neurodiversity</strong> - as a strength, not something to fix</p>
               </div>
             </div>
           </div>
