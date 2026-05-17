@@ -6,19 +6,32 @@ export default function KinderKindConnectLanding() {
   const [name, setName] = useState('');
   const [role, setRole] = useState('parent');
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Create mailto link with pre-filled details
-    const subject = `KinderKindConnect Interest: ${role === 'parent' ? 'Parent' : 'Tutor'}`;
-    const body = `Hi Steve,\n\nI'm interested in KinderKindConnect.\n\nName: ${name}\nEmail: ${email}\nI am a: ${role}\n\nLooking forward to hearing from you!`;
-    
-    // For now, just show success message
-    setSubmitted(true);
-    setTimeout(() => {
-      window.location.href = `mailto:kinderkindconnect@proton.me?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    }, 1000);
+    setLoading(true);
+
+    try {
+      const response = await fetch('/api/submit-form', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, role }),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        alert('Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error submitting form. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -117,10 +130,11 @@ export default function KinderKindConnectLanding() {
 
                   <button
                     type="submit"
-                    className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 flex items-center justify-center gap-2"
+                    disabled={loading}
+                    className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Mail className="w-5 h-5" />
-                    Get in Touch
+                    {loading ? 'Sending...' : 'Get in Touch'}
                   </button>
                 </form>
 
